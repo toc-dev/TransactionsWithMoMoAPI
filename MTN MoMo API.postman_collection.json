@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "492d31a4-5fe9-4853-91af-2cb58262f3d3",
+		"name": "MTN MoMo API",
+		"description": "API for sandbox environment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sandbox User",
+			"item": [
+				{
+					"name": "CreateAPIUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Reference-Id",
+								"value": "c8ac19ca-c7d2-4804-b33d-4c568ea0362d",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"providerCallbackHost\": \"https://webhook.site/1adc9d11-e64c-4e1f-b06f-e1520245f3fe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/v1_0/apiuser",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"v1_0",
+								"apiuser"
+							]
+						},
+						"description": "this request create API User"
+					},
+					"response": []
+				},
+				{
+					"name": "GetCreatedUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/v1_0/apiuser/c8ac19ca-c7d2-4804-b33d-4c568ea0362d",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"v1_0",
+								"apiuser",
+								"c8ac19ca-c7d2-4804-b33d-4c568ea0362d"
+							]
+						},
+						"description": "This get the created user. Remember to provide the UUID in the URI"
+					},
+					"response": []
+				},
+				{
+					"name": "GeneratingAPIToken",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "c8ac19ca-c7d2-4804-b33d-4c568ea0362d",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "3938b5202d0743718cf04b64f69849a7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/collection/token/",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"collection",
+								"token",
+								""
+							]
+						},
+						"description": "Uses X-Reference-Id as username and apiKey as password"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAPIKey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/v1_0/apiuser/c8ac19ca-c7d2-4804-b33d-4c568ea0362d/apikey",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"v1_0",
+								"apiuser",
+								"c8ac19ca-c7d2-4804-b33d-4c568ea0362d",
+								"apikey"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Collection Product",
+			"item": [
+				{
+					"name": "RequestToPay",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Reference-Id",
+								"value": "c8ac19ca-c7d2-4804-b33d-4c568ea0362d",
+								"type": "text"
+							},
+							{
+								"key": "X-Target-Environment",
+								"value": "sandbox",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": \"5.0\",\n  \"currency\": \"EUR\",\n  \"externalId\": \"6353636\",\n  \"payer\": {\n    \"partyIdType\": \"MSISDN\",\n    \"partyId\": \"0248888736\"\n  },\n  \"payerMessage\": \"Pay for product a\",\n  \"payeeNote\": \"payer note\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"collection",
+								"v1_0",
+								"requesttopay"
+							]
+						},
+						"description": "This operation is used to request a payment from a consumer (Payer). The payer will be asked to authorize the payment. The transaction will be executed once the payer has authorized the payment. The requesttopay will be in status PENDING until the transaction is authorized or declined by the payer or it is timed out by the system. Status of the transaction can be validated by using the GET /requesttopay/<resourceId>"
+					},
+					"response": []
+				},
+				{
+					"name": "GetRequestToPayTransactionStatus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							},
+							{
+								"key": "X-Target-Environment",
+								"value": "sandbox",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay/15284da8-9169-448b-b1aa-d71080b9e6eb",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"collection",
+								"v1_0",
+								"requesttopay",
+								"15284da8-9169-448b-b1aa-d71080b9e6eb"
+							]
+						},
+						"description": "Note: this uses the generated x-reference-Id that was use in the payload or the header of the request"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccountBalance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							},
+							{
+								"key": "X-Target-Environment",
+								"value": "sandbox",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/collection/v1_0/account/balance",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"collection",
+								"v1_0",
+								"account",
+								"balance"
+							]
+						},
+						"description": "Get the balance of the account."
+					},
+					"response": []
+				},
+				{
+					"name": "CheckIfUserIsRegisteredAndActive",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Target-Environment",
+								"value": "sandbox",
+								"equals": true
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "f4f2da18c0db4033b897644dc8ef1fec",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox.momodeveloper.mtn.com/collection/v1_0/accountholder/msisdn/0243656543/active?",
+							"protocol": "https",
+							"host": [
+								"sandbox",
+								"momodeveloper",
+								"mtn",
+								"com"
+							],
+							"path": [
+								"collection",
+								"v1_0",
+								"accountholder",
+								"msisdn",
+								"0243656543",
+								"active"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Operation is used to check if an account holder is registered and active in the system."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GettingUUIDV4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.uuidgenerator.net/api/version4",
+					"protocol": "https",
+					"host": [
+						"www",
+						"uuidgenerator",
+						"net"
+					],
+					"path": [
+						"api",
+						"version4"
+					]
+				},
+				"description": "This request response with UUID version to be used to generate API User"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6ImM4YWMxOWNhLWM3ZDItNDgwNC1iMzNkLTRjNTY4ZWEwMzYyZCIsImV4cGlyZXMiOiIyMDE5LTEwLTEwVDIzOjA4OjQyLjM4MyIsInNlc3Npb25JZCI6ImNhNWQ3YmRhLWEwZWYtNDUyYS05MTgxLWU5MjZhZTc5YjE0MSJ9.fbJePiuFwmWtxlLeZ8FGoPvQRAyf6h5u_w95VO9JY5qG343LYyTiSAa3RYPya6HJ0E-jhAnVHLrrZ6z_RTnX6Tm4L7XpVk75V921tX6CcyJyv8Kv_GP0JXHVIlgXuyE-3yKJ35F4D8OOFjCiP78GPzawCRoufHffLJvlPazrBocdE8ajJMqih_3Fp6SbohDRQQrhd6Dy151WD1015UBNPSY0kxR8V7VEAhv-Ns6y5GyWSQQU0MPcNwbes7PPALaVJbZnDYzfVvnZrmfGNw3wILdxqQvX8rRP6JsjJk1VvN_KMpcHmQ9PYXR7fM9vKtkxDkJDu5DoAgkarm16PsMuFg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "40a97383-7034-4786-83de-efed58fc6683",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a425ffb6-d0af-48a1-9f97-299db01362dd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
