@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +22,20 @@ namespace XendBuySellEscrow.Controllers
             _transactionService = transactionService;
         }
         [HttpPost("transact")]
-        public async Task<IActionResult> RequestToPay([FromHeader] string ocpApimKey, [FromHeader] Guid xReferenceId, [FromBody] PaymentDetails paymentDetails, [FromHeader] string token, [FromHeader] string xTargetEnvironment)
+        public async Task<IActionResult> RequestToPay([FromHeader] string ocpApimKey, [FromHeader] Guid xReferenceId, [FromBody] PaymentDetails paymentDetails, [FromHeader] string xTargetEnvironment)
         {
-            HttpResponseMessage response = await _transactionService.RequestToPay(xReferenceId, ocpApimKey, paymentDetails, token, xTargetEnvironment);
+            string response = await _transactionService.RequestToPay(xReferenceId, ocpApimKey, paymentDetails, xTargetEnvironment);
             return Ok(response);
         }
 
         [HttpGet("{xReferenceId}")]
-        public async Task<IActionResult> GetRequestToPayTransaction(Guid xReferenceId, string OcpApimSubscriptionKey, string token)
+        public async Task<IActionResult> GetRequestToPayTransaction(Guid xReferenceId, string OcpApimSubscriptionKey, string tokenKey)
         {
-            HttpResponseMessage response = await _transactionService.GetRequestToPayTransaction(xReferenceId, OcpApimSubscriptionKey, token);
+            HttpResponseMessage response = await _transactionService.GetRequestToPayTransaction(xReferenceId, OcpApimSubscriptionKey, tokenKey);
             return Ok(response);
         }
 
-        [HttpGet("chechkuser")]
+        [HttpGet("checkuser")]
         public async Task<IActionResult> CheckIfUserIsRegisteredAndActive(string OcpApimSubscriptionKey, Guid xReferenceId, string xTargetEnvironment = "sandbox")
         {
             HttpResponseMessage responseMessage = await _transactionService.CheckIfUserIsRegisteredAndActive(OcpApimSubscriptionKey, xReferenceId, xTargetEnvironment);
@@ -45,6 +46,27 @@ namespace XendBuySellEscrow.Controllers
         {
             HttpResponseMessage responseMessage = await _transactionService.GetAccountBalance(OcpApimSubscriptionKey, token, xTargetEnvironment);
             return Ok(responseMessage);
+        }
+
+        [HttpPost("deliverynotif")]
+        public async Task<IActionResult> RequestToPayDeliveryNotification(Guid xReferenceId, string ocpApimSubscriptionKey, NotificationMessage notificationMessage, string xTargetEnvironment)
+        {
+            HttpResponseMessage responseMessage = await _transactionService.RequestToPayDeliveryNotification(xReferenceId, ocpApimSubscriptionKey, notificationMessage, xTargetEnvironment);
+            return Ok(responseMessage);
+        }
+
+        [HttpPost("tranfer")]
+        public async Task<IActionResult> TransferFunds([FromHeader] string ocpApimKey, [FromHeader] Guid xReferenceId, [FromBody] TransferModel transferModel, [FromHeader] string xTargetEnvironment)
+        {
+            HttpResponseMessage response = await _transactionService.Transfer(xReferenceId, ocpApimKey, transferModel, xTargetEnvironment);
+            return Ok(response);
+        }
+        
+        [HttpPost("withdrawal")]
+        public async Task<IActionResult> WithdrawalRequest([FromHeader] string ocpApimKey, [FromHeader] Guid xReferenceId, [FromBody] WithdrawalMethod withdrawalMethod, [FromHeader] string xTargetEnvironment)
+        {
+            HttpResponseMessage response = await _transactionService.RequestToWithdraw(xReferenceId, ocpApimKey, withdrawalMethod, xTargetEnvironment);
+            return Ok(response);
         }
     }
 }

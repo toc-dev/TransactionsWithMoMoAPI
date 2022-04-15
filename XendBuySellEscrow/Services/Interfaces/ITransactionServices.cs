@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,8 +12,11 @@ namespace XendBuySellEscrow.Services.Interfaces
     {
         Task<HttpResponseMessage> CheckIfUserIsRegisteredAndActive(string OcpApimSubscriptionKey, Guid xReferenceId, string xTargetEnvironment = "sandbox");
 
-        Task<HttpResponseMessage> RequestToPay(Guid xReferenceId, string OcpApimSubscriptionKey, PaymentDetails paymentDetails, string token, string xTargetEnvironment = "sandbox");
-        Task<HttpResponseMessage> GetRequestToPayTransaction(Guid xReferenceId, string OcpApimSubscriptionKey, string token, string xTargetEnvironment = "sandbox");
+        Task<string> RequestToPay(Guid xReferenceId, string OcpApimSubscriptionKey, PaymentDetails paymentDetails, string xTargetEnvironment = "sandbox");
+        Task<HttpResponseMessage> GetRequestToPayTransaction(Guid xReferenceId, string OcpApimSubscriptionKey, string tokenKey, string xTargetEnvironment = "sandbox");
         Task<HttpResponseMessage> GetAccountBalance(string OcpApimSubscriptionKey, string token, string xTargetEnvironment = "sandbox");
+        Task<HttpResponseMessage> RequestToPayDeliveryNotification(Guid xReferenceId, string ocpApimSubscriptionKey, NotificationMessage notificationMessage, string xTargetEnvironment);
+        Task<HttpResponseMessage> Transfer(Guid xReferenceId, string ocpApimSubscriptionKey, TransferModel transferModel, string xTargetEnvironment);
+        Task<HttpResponseMessage> RequestToWithdraw(Guid xReferenceId, string ocpApimSubscriptionKey, WithdrawalMethod withdrawalMethod, string xTargetEnvironment)
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using XendBuySellEscrow.Models;
+using XendBuySellEscrow.Models.ResponseModels;
 using XendBuySellEscrow.Services.Interfaces;
 
 namespace XendBuySellEscrow.Controllers
@@ -23,7 +24,7 @@ namespace XendBuySellEscrow.Controllers
         [HttpPost("{id}/apikey")]
         public async Task<IActionResult> GetApiKey(string ocpApimKey, Guid id)
         {
-            HttpResponseMessage apiKey = await  _moMoAccountService.GetApiKey(ocpApimKey, id);
+            ApiKeyResponse apiKey = await  _moMoAccountService.GetApiKey(ocpApimKey, id);
             return (Ok(apiKey));
         }
         [HttpPost("createuser")]
@@ -39,9 +40,9 @@ namespace XendBuySellEscrow.Controllers
             return Ok(responseMessage);
         }
         [HttpPost("gettoken")]
-        public async Task<IActionResult> GenerateToken(string OcpApimSubscriptionKey, Guid xReferenceId, string tokenKey)
+        public async Task<IActionResult> GenerateToken(string OcpApimSubscriptionKey, Guid xReferenceId)
         {
-            HttpResponseMessage responseMessage = await _moMoAccountService.GenerateApiToken(OcpApimSubscriptionKey, xReferenceId, tokenKey);
+            TokenKeyResponse responseMessage = await _moMoAccountService.GenerateApiToken(OcpApimSubscriptionKey, xReferenceId);
             return Ok(responseMessage);
         }
     }
