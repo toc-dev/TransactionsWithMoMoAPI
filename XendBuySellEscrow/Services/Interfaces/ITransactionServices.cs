@@ -17,6 +17,6 @@ namespace XendBuySellEscrow.Services.Interfaces
         Task<HttpResponseMessage> GetAccountBalance(string OcpApimSubscriptionKey, string token, string xTargetEnvironment = "sandbox");
         Task<HttpResponseMessage> RequestToPayDeliveryNotification(Guid xReferenceId, string ocpApimSubscriptionKey, NotificationMessage notificationMessage, string xTargetEnvironment);
         Task<HttpResponseMessage> Transfer(Guid xReferenceId, string ocpApimSubscriptionKey, TransferModel transferModel, string xTargetEnvironment);
-        Task<HttpResponseMessage> RequestToWithdraw(Guid xReferenceId, string ocpApimSubscriptionKey, WithdrawalMethod withdrawalMethod, string xTargetEnvironment)
+        Task<HttpResponseMessage> RequestToWithdraw(Guid xReferenceId, string ocpApimSubscriptionKey, WithdrawalMethod withdrawalMethod, string xTargetEnvironment);
     }
 }
