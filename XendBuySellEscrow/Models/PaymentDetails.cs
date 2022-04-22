@@ -29,10 +29,10 @@ namespace XendBuySellEscrow.Models
 
     public class TransferModel
     {
-        public int amount { get; set; }
+        public string amount { get; set; }
         public string currency { get; set; }
-        public int financialTransactionId { get; set; }
-        public int externalId { get; set; }
+        public string financialTransactionId { get; set; }
+        public string externalId { get; set; }
         public Payee payee { get; set; }
         public string status { get; set; }
     }
@@ -40,7 +40,7 @@ namespace XendBuySellEscrow.Models
     public class Payee
     {
         public string partyIdType { get; set; }
-        public float partyId { get; set; }
+        public string partyId { get; set; }
     }
 
 

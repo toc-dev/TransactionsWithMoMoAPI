@@ -70,9 +70,7 @@ namespace XendBuySellEscrow.Services.Implementation
             HttpResponseMessage response = await _httpClient.GetAsync($"apiuser/{xReferenceId}");
             return response;
         }
-
-        public async Task<TokenKeyResponse> GenerateApiToken(string OcpApimSubscriptionKey, Guid xReferenceId)
-
+        private async Task HttpResponses(string OcpApimSubscriptionKey, Guid xReferenceId)
         {
             ApiKeyResponse tokenKey = await GetApiKey(OcpApimSubscriptionKey, xReferenceId);
             string getToken = tokenKey.ApiResponse;
@@ -81,10 +79,31 @@ namespace XendBuySellEscrow.Services.Implementation
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", OcpApimSubscriptionKey);
             _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + basicAuthCredentials);
+        }
+
+        public async Task<TokenKeyResponse> GenerateApiToken(string OcpApimSubscriptionKey, Guid xReferenceId)
+
+        {
+            await HttpResponses(OcpApimSubscriptionKey, xReferenceId);
             
             HttpResponseMessage response = await _httpClient.PostAsync($"https://sandbox.momodeveloper.mtn.com/collection/token/", null);
             string content = await response.Content.ReadAsStringAsync();
-            JObject json = JObject.Parse(content);
+            var json = JObject.Parse(content);
+            Console.WriteLine(json);
+
+            return new TokenKeyResponse
+            {
+                ApiToken = json["access_token"].ToString()
+            };
+        }
+        public async Task<TokenKeyResponse> GenerateApiTokenRemittance(string OcpApimSubscriptionKey, Guid xReferenceId)
+
+        {
+            await HttpResponses(OcpApimSubscriptionKey, xReferenceId);
+
+            HttpResponseMessage response = await _httpClient.PostAsync($"https://sandbox.momodeveloper.mtn.com/remittance/token/", null);
+            string content = await response.Content.ReadAsStringAsync();
+            var json = JObject.Parse(content);
 
             return new TokenKeyResponse
             {

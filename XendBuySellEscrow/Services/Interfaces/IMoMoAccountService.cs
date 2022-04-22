@@ -14,5 +14,6 @@ namespace XendBuySellEscrow.Services.Interfaces
         Task<HttpResponseMessage> GetCreatedUser(string OcpApimSubscriptionKey, Guid xReferenceId);
         Task<ApiKeyResponse> GetApiKey(string OcpApimSubscriptionKey, Guid xReferenceId);
         Task<TokenKeyResponse> GenerateApiToken(string OcpApimSubscriptionKey, Guid xReferenceId);
+        Task<TokenKeyResponse> GenerateApiTokenRemittance(string OcpApimSubscriptionKey, Guid xReferenceId);
     }
 }

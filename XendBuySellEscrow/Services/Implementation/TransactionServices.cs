@@ -100,8 +100,8 @@ namespace XendBuySellEscrow.Services.Implementation
 
         public async Task<HttpResponseMessage> Transfer(Guid xReferenceId, string ocpApimSubscriptionKey, TransferModel transferModel, string xTargetEnvironment)
         {
-            string uri = $"https://sandbox.momodeveloper.mtn.com/disbursement/v1_0/transfer/{xReferenceId}";
-            TokenKeyResponse bearerToken = await _moMoAccountService.GenerateApiToken(ocpApimSubscriptionKey, xReferenceId);
+            string uri = $"https://sandbox.momodeveloper.mtn.com/remittance/v1_0/transfer";
+            TokenKeyResponse bearerToken = await _moMoAccountService.GenerateApiTokenRemittance(ocpApimSubscriptionKey, xReferenceId);
             string bearerTokenString = bearerToken.ApiToken;
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", $"{bearerTokenString}");

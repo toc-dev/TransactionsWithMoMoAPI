@@ -55,7 +55,7 @@ namespace XendBuySellEscrow.Controllers
             return Ok(responseMessage);
         }
 
-        [HttpPost("tranfer")]
+        [HttpPost("transfer")]
         public async Task<IActionResult> TransferFunds([FromHeader] string ocpApimKey, [FromHeader] Guid xReferenceId, [FromBody] TransferModel transferModel, [FromHeader] string xTargetEnvironment)
         {
             HttpResponseMessage response = await _transactionService.Transfer(xReferenceId, ocpApimKey, transferModel, xTargetEnvironment);
